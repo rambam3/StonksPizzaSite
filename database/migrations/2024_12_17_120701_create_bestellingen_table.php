@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('pizzas', function (Blueprint $table) {
+        Schema::create('bestellingen', function (Blueprint $table) {
             $table->id();
-            $table->string('naam');
+            $table->foreignId('klant_id')->constrained('klanten')->onDelete('cascade');
+            $table->date('datum');
+            $table->string('status', ['Initieel', 'Betaald', 'Bereiden', 'Inoven', 'Onderweg', 'Bezorgd']);
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('pizzas');
+        Schema::dropIfExists('bestellingen');
     }
 };
