@@ -6,7 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bestelling extends Model
 {
-    protected $fillable = ['klant_id', 'datum', 'status'];
+    protected $casts = [
+        'status' => BestelStatus::class,
+    ];
 
     public function klant()
     {
