@@ -12,7 +12,8 @@ class IngredientController extends Controller
      */
     public function index()
     {
-        //
+        Ingredient::all();
+        return view('ingredients.index', compact('ingredients'));
     }
 
     /**
@@ -20,7 +21,7 @@ class IngredientController extends Controller
      */
     public function create()
     {
-        //
+        return view('ingredients.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class IngredientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Ingredient::create($request->all());
+        return redirect()->route('ingredients.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class IngredientController extends Controller
      */
     public function show(Ingredient $ingredient)
     {
-        //
+        return view('ingredients.show', compact('ingredient'));
     }
 
     /**
@@ -44,7 +46,7 @@ class IngredientController extends Controller
      */
     public function edit(Ingredient $ingredient)
     {
-        //
+        return view('ingredients.edit', compact('ingredient'));
     }
 
     /**
@@ -52,7 +54,12 @@ class IngredientController extends Controller
      */
     public function update(Request $request, Ingredient $ingredient)
     {
-        //
+        $ingredient->naam = $request->naam;
+        $ingredient->prijs = $request->prijs;
+        $ingredient->hoeveelheid = $request->hoeveelheid;
+        $ingredient->save();
+
+        return redirect()->route('ingredients.index');
     }
 
     /**
@@ -60,6 +67,7 @@ class IngredientController extends Controller
      */
     public function destroy(Ingredient $ingredient)
     {
-        //
+        $ingredient->delete();
+        return redirect()->route('ingredients.index');
     }
 }

@@ -12,7 +12,8 @@ class BestelregelController extends Controller
      */
     public function index()
     {
-        //
+        Bestelregel::all();
+        return view('bestelregels.index', compact('bestelregels'));
     }
 
     /**
@@ -20,7 +21,7 @@ class BestelregelController extends Controller
      */
     public function create()
     {
-        //
+        return view('bestelregels.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class BestelregelController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Bestelregel::create($request->all());
+        return redirect()->route('bestelregels.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class BestelregelController extends Controller
      */
     public function show(Bestelregel $bestelregel)
     {
-        //
+        return view('bestelregels.show', compact('bestelregel'));
     }
 
     /**
@@ -44,7 +46,7 @@ class BestelregelController extends Controller
      */
     public function edit(Bestelregel $bestelregel)
     {
-        //
+        return view('bestelregels.edit', compact('bestelregel'));
     }
 
     /**
@@ -52,7 +54,13 @@ class BestelregelController extends Controller
      */
     public function update(Request $request, Bestelregel $bestelregel)
     {
-        //
+        $bestelregel->bestelling_id = $request->bestelling_id;
+        $bestelregel->pizza_id = $request->pizza_id;
+        $bestelregel->aantal = $request->aantal;
+        $bestelregel->prijs = $request->prijs;
+        $bestelregel->save();
+
+        return redirect()->route('bestelregels.index');
     }
 
     /**
@@ -60,6 +68,7 @@ class BestelregelController extends Controller
      */
     public function destroy(Bestelregel $bestelregel)
     {
-        //
+        $bestelregel->delete();
+        return redirect()->route('bestelregels.index');
     }
 }
