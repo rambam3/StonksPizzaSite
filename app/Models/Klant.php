@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Klant extends Model
 {
+    protected $table = 'klanten';
+    
     protected $fillable = ['naam', 'adres', 'woonplaats', 'telefoonnummer', 'emailadres'];
 
     public function bestellingen()

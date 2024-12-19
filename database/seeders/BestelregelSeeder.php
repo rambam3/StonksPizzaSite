@@ -21,7 +21,8 @@ class BestelregelSeeder extends Seeder
                     'bestelling_id' => $bestelling->id,
                     'pizza_id' => $pizza->id,
                     'aantal' => rand(1, 5),
-                    'afmeting' => ['klein', 'normaal', 'groot'][array_rand(['klein', 'normaal', 'groot'])]
+                    'afmeting' => ['klein', 'normaal', 'groot'][array_rand(['klein', 'normaal', 'groot'])],
+                    'regelprijs' => $basisprijs * $factor * $this->aantal
                 ]);
             }
         }

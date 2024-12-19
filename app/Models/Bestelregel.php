@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bestelregel extends Model
 {
-    protected $fillable = ['bestelling_id', 'pizza_id', 'aantal', 'afmeting'];
+    protected $fillable = ['bestelling_id', 'pizza_id', 'aantal', 'afmeting', 'regelprijs'];
 
     public function bestelling()
     {

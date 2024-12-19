@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use \app\Models\BestelStatus;
 
 return new class extends Migration
 {
@@ -15,7 +16,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('klant_id')->constrained('klanten')->onDelete('cascade');
             $table->date('datum');
-            $table->string('status', ['Initieel', 'Betaald', 'Bereiden', 'Inoven', 'Onderweg', 'Bezorgd']);
+            $table->string('status');
             $table->timestamps();
         });
     }
