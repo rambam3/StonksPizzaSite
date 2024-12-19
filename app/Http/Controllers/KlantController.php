@@ -12,7 +12,8 @@ class KlantController extends Controller
      */
     public function index()
     {
-        //
+        Klant::all();
+        return view('klanten.index', compact('klanten'));
     }
 
     /**
@@ -20,7 +21,7 @@ class KlantController extends Controller
      */
     public function create()
     {
-        //
+        return view('klanten.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class KlantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Klant::create($request->all());
+        return redirect()->route('klanten.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class KlantController extends Controller
      */
     public function show(Klant $klant)
     {
-        //
+        return view('klanten.show', compact('klant'));
     }
 
     /**
@@ -44,7 +46,7 @@ class KlantController extends Controller
      */
     public function edit(Klant $klant)
     {
-        //
+        return view('klanten.edit', compact('klant'));  
     }
 
     /**
@@ -52,7 +54,14 @@ class KlantController extends Controller
      */
     public function update(Request $request, Klant $klant)
     {
-        //
+        $klant->naam = $request->naam;
+        $klant->adres = $request->adres;
+        $klant->postcode = $request->postcode;
+        $klant->woonplaats = $request->woonplaats;
+        $klant->telefoonnummer = $request->telefoonnummer;
+        $klant->email = $request->email;
+        $klant->save();
+        return redirect()->route('klanten.index');
     }
 
     /**
@@ -60,6 +69,7 @@ class KlantController extends Controller
      */
     public function destroy(Klant $klant)
     {
-        //
+        $klant->delete();
+        return redirect()->route('klanten.index');
     }
 }
