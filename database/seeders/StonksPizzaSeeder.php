@@ -80,13 +80,13 @@ class StonksPizzaSeeder extends Seeder
         foreach ($bestellingen as $bestelling) {
             foreach ($pizzas as $pizza) {
                 $aantal = rand(1, 5);
-                $regelprijs = $pizza->prijs * $aantal;
                 Bestelregel::create([
                     'bestelling_id' => $bestelling->id,
                     'pizza_id' => $pizza->id,
                     'aantal' => $aantal,
                     'afmeting' => ['klein', 'normaal', 'groot'][array_rand(['klein', 'normaal', 'groot'])],
-                    'regelprijs' => $regelprijs,
+                    'regelprijs' => $pizza->prijs * $aantal
+
                 ]);
             }
         }
