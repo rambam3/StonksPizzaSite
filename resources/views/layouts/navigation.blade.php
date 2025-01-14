@@ -13,7 +13,7 @@
             <!-- Center -->
             <div class="flex items-center space-x-4 hidden sm:flex">
                 <!-- Menu Link -->
-                <a href="{{ route('dashboard') }}" class="text-white text-xl font-semibold hover:underline"> 
+                <a href="{{ route('menu') }}" class="text-white text-xl font-semibold hover:underline"> 
                     Menu
                 </a>
                 <!-- Over Ons Link -->
