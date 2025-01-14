@@ -1,7 +1,7 @@
 <div class="bg-gray-300 py-4">
-    <div class="container mx-auto flex justify-center items-center relative">
+    <div class="container mx-auto flex flex-col md:flex-row justify-center items-center relative">
         <!-- Social Media Links -->
-        <div class="absolute left-0 flex flex-col items-center space-y-2">
+        <div class="flex flex-col items-center space-y-2 md:absolute md:left-0 md:flex-row md:space-y-0 md:space-x-4">
             <span class="text-lg uppercase tracking-wider">Volg ons op</span>
             <div class="flex space-x-4">
                 <a href="https://www.facebook.com/PizzaniEindhoven/" class="text-black text-lg">
@@ -17,12 +17,12 @@
         </div>
 
         <!-- Logo -->
-        <div class="text-lg font-bold tracking-wider text-black">
+        <div class="text-2xl font-bold tracking-wider text-black my-4 md:my-0">
             Stonks Pizza
         </div>
 
         <!-- Links -->
-        <div class="absolute right-0 flex space-x-8 text-lg uppercase tracking-wider">
+        <div class="flex space-x-8 text-lg uppercase tracking-wider md:absolute md:right-0">
             <a href="#" class="text-black hover:underline">Veelgestelde Vragen</a>
             <a href="#" class="text-black hover:underline">Contact</a>
         </div>
