@@ -7,13 +7,14 @@ use Illuminate\Http\Request;
 
 class KlantController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         Klant::all();
-        return view('klanten.index', compact('klanten'));
+        return view('klanten.index', compact('Klant'));
     }
 
     /**
