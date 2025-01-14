@@ -5,7 +5,7 @@
 
 
 <x-guest-layout>
-    <div class="bg-[#5a4033] opacity-70 p-8 rounded-lg shadow-lg shadow-lg w-96">
+    <div class="bg-[#5a4033] opacity-70 p-8 rounded-lg shadow-lg w-96">
         <h1 class="text-7xl text-center text-white font-bold mb-6">Login</h1>
 
         <x-auth-session-status class="mb-4" :status="session('status')" />
