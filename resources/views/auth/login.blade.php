@@ -1,7 +1,12 @@
-<x-guest-layout>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="{{ asset('../css/fontStyle.css') }}">
 
+
+<x-guest-layout>
     <div class="bg-[#5a4033] opacity-70 p-8 rounded-lg shadow-lg shadow-lg w-96">
-        <h1 class="text-2xl text-center text-white font-bold mb-6 ">Login</h1>
+        <h1 class="text-7xl text-center text-white font-bold mb-6">Login</h1>
 
         <x-auth-session-status class="mb-4" :status="session('status')" />
 
@@ -38,10 +43,10 @@
                 </x-inlog-button>
 
                 <!--Seperator -->
-                <h2><span>OF</span></h2>
+                <h2 class="w-full text-center border-b-2 border-white  mt-2.5 mb-5 leading-[0.1em] "><span class="text-white bg-[#5a4033] px-2.5">OF</span></h2>
 
                 <!-- Register knop -->
-                <a href="{{ route('register') }}" class="text-sm text-white bg-[#B2BF84] py-2 px-4 rounded-md hover:bg-[#8c9562]">
+                <a href="{{ route('register') }}" class="text-lg font-bold bg-[#B2BF84] py-2 px-7  rounded-md hover:bg-[#8c9562]">
                     {{ __('Registreer') }}
                 </a>
             </div>
@@ -49,25 +54,3 @@
     </div>
     </div>
 </x-guest-layout>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
-<style>
-    * {
-        font-family: 'Amatic SC', cursive;
-    }
-
-    h2 {
-        width: 100%;
-        text-align: center;
-        border-bottom: 2px solid white;
-        line-height: 0.1em;
-        margin: 10px 0 20px;
-    }
-
-    h2 span {
-        background: #5a4033;
-        padding: 0 10px;
-        color: white;
-    }
