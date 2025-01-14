@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('naam');
             $table->decimal('prijs');
+            $table->string('image_path')->default('images/pizzas/noImageAvailable.jpg');
             $table->timestamps();
         });
     }
