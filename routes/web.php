@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Auth;
 
 
 Route::get('/', function () {
@@ -12,12 +13,9 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::get('/menu', function () {
-    return view('menu');
-})->name('menu');
 
-route::get('/klant/home', function () {
-    return view('klant.home');
+Route::get('/klant/home', function () {
+    return view('klant.home', ['user' => Auth::user()]);
 })->name('klant.home');
 
 route::get('/klant/menu', function () {
