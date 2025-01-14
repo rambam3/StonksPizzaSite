@@ -29,6 +29,7 @@ class PizzaController extends Controller
      */
     public function store(Request $request)
     {
+        $imagePath = $request->file('afbeelding')->store('images/pizzas', 'public');
         Pizza::create($request->all());
         return redirect()->route('pizzas.index');
     }
@@ -48,7 +49,13 @@ class PizzaController extends Controller
     {
         return view('pizzas.edit', compact('pizza'));
     }
-
+foreach ($pizzas as $pizza => $value) {
+    {
+        $pizza->naam
+        $pizza->naam+".jpg"
+    }
+    # code...
+}
     /**
      * Update the specified resource in storage.
      */

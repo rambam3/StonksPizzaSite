@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pizza extends Model
 {
-    protected $fillable = ['naam'];
+    protected $fillable = ['naam', 'prijs', 'image_path'];
 
     public function ingredienten()
     {
