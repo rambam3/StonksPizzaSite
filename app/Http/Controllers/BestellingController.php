@@ -12,7 +12,8 @@ class BestellingController extends Controller
      */
     public function index()
     {
-        //
+        Bestelling::all();
+        return view('bestellingen.index', compact('bestellingen'));
     }
 
     /**
@@ -20,7 +21,7 @@ class BestellingController extends Controller
      */
     public function create()
     {
-        //
+        return view('bestellingen.create');
     }
 
     /**
@@ -28,7 +29,8 @@ class BestellingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        Bestelling::create($request->all());
+        return redirect()->route('bestellingen.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class BestellingController extends Controller
      */
     public function show(Bestelling $bestelling)
     {
-        //
+        return view('bestellingen.show', compact('bestelling'));
     }
 
     /**
@@ -44,7 +46,7 @@ class BestellingController extends Controller
      */
     public function edit(Bestelling $bestelling)
     {
-        //
+        return view('bestellingen.edit', compact('bestelling'));
     }
 
     /**
@@ -52,7 +54,13 @@ class BestellingController extends Controller
      */
     public function update(Request $request, Bestelling $bestelling)
     {
-        //
+        $bestelling->klant_id = $request->klant_id;
+        $bestelling->totaalprijs = $request->totaalprijs;
+        $bestelling->datum = $request->datum;
+        $bestelling->status = $request->status;
+        $bestelling->save();
+
+        return redirect()->route('bestellingen.index');
     }
 
     /**
@@ -60,6 +68,6 @@ class BestellingController extends Controller
      */
     public function destroy(Bestelling $bestelling)
     {
-        //
+        $bestelling->delete();
     }
 }
