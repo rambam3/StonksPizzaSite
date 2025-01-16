@@ -57,7 +57,7 @@
 <x-app-layout>
     <div class="container mx-auto px-4">
         <!-- Welcome Section -->
-        <section class="text-center py-12">
+        <section class="text-center py-12" style="background: url('images/Pizza-Achtergrond-home.jpg') no-repeat center center; background-size: cover;">
             <h1 class="text-4xl font-bold mb-4"> <?php
                                                     date_default_timezone_set('Europe/Amsterdam');
                                                     $time = date("H");
