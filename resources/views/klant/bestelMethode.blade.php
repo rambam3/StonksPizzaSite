@@ -6,7 +6,7 @@
                 <h2 class="text-2xl font-bold ml-8">Afhalen</h2>
 
             </div>
-            <div>
+            <div class="mt-8 bg-slate-900">
                 <h2 class="text-2xl font-bold ml-8">Bezorgen</h2>
 
             </div>
