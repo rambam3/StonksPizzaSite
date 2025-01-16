@@ -5,7 +5,7 @@
             <!-- Left Side -->
             <div class="flex items-center space-x-4"> 
                 <!-- Logo -->
-                <a href="{{ route('klant.home') }}">
+                <a href="{{ route('home') }}">
                     <img src="/images/pizza.png" alt="Pizza House Logo" class="block h-12 w-auto"> 
                 </a>
             </div>
@@ -13,7 +13,7 @@
             <!-- Center -->
             <div class="flex items-center space-x-4 hidden sm:flex">
                 <!-- Menu Link -->
-                <a href="{{ route('dashboard') }}" class="text-white text-xl font-semibold hover:underline"> 
+                <a href="{{ route('menu') }}" class="text-white text-xl font-semibold hover:underline"> 
                     Menu
                 </a>
                 <!-- Over Ons Link -->
