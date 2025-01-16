@@ -23,6 +23,8 @@ route::get('/klant/menu', function () {
 })->name('klant.menu');
 
 
+
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
