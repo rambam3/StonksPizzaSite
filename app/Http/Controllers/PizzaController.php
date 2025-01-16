@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Pizza;
 use Illuminate\Http\Request;
 
+
 class PizzaController extends Controller
 {
     /**
@@ -13,7 +14,7 @@ class PizzaController extends Controller
     public function index()
     {
         $pizzas = Pizza::all();
-        return view('pizzas.index', compact('pizzas'));
+        return view('klant.menu', compact('pizzas'));
     }
 
     /**
@@ -49,13 +50,7 @@ class PizzaController extends Controller
     {
         return view('pizzas.edit', compact('pizza'));
     }
-foreach ($pizzas as $pizza => $value) {
-    {
-        $pizza->naam
-        $pizza->naam+".jpg"
-    }
     # code...
-}
     /**
      * Update the specified resource in storage.
      */
