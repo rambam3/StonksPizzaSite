@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\PizzaController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -18,12 +19,7 @@ Route::get('/klant/home', function () {
     return view('klant.home', ['user' => Auth::user()]);
 })->name('klant.home');
 
-route::get('/klant/menu', function () {
-    return view('klant.menu');
-})->name('klant.menu');
-
-
-
+Route::get('/menu', [PizzaController::class, 'index'])->name('menu');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
