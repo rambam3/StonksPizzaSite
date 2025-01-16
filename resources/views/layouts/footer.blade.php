@@ -1,4 +1,4 @@
-<div class="bg-gray-300 py-4">
+<div class="bg-[#A3998C] py-4">
     <div class="container mx-auto flex flex-col md:flex-row justify-center items-center relative">
         <!-- Social Media Links -->
         <div class="flex flex-col items-center space-y-2 md:absolute md:left-0 md:flex-row md:space-y-0 md:space-x-4">
