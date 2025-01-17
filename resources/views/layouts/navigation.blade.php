@@ -17,11 +17,11 @@
                     Menu
                 </a>
                 <!-- Over Ons Link -->
-                <a href="{{ route('dashboard') }}" class="text-white text-xl font-semibold hover:underline"> 
+                <a href="{{ route('overons') }}" class="text-white text-xl font-semibold hover:underline"> 
                     Over Ons
                 </a>
                 <!-- Contact Link -->
-                <a href="{{ route('dashboard') }}" class="text-white text-xl font-semibold hover:underline"> 
+                <a href="{{ route('contact') }}" class="text-white text-xl font-semibold hover:underline"> 
                     Contact
                 </a>
                 
@@ -70,13 +70,13 @@
     
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-[#c79976]">
         <div class="pt-2 pb-3 space-y-1">
-            <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
+            <a href="{{ route('menu') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
                 Menu
             </a>
-            <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
+            <a href="{{ route('overons') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
                 Over Ons
             </a>
-            <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
+            <a href="{{ route('contact') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
                 Contact
             </a>
 
