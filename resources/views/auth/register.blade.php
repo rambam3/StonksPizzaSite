@@ -3,7 +3,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ asset('../css/fontStyle.css') }}">
 <x-guest-layout>
-    <div class="bg-[#5a4033] opacity-70 p-8 rounded-lg shadow-lg shadow-lg w-96">
+    <div class="bg-[#5a4033] opacity-70 p-8 rounded-lg shadow-lg w-96">
         <h1 class="text-2xl text-center text-white font-bold mb-6 ">Create account</h1>
         <form method="POST" action="{{ route('register') }}">
             @csrf

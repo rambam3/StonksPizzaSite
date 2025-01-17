@@ -57,19 +57,19 @@
 <x-app-layout>
     <div class="container mx-auto px-4">
         <!-- Welcome Section -->
-        <section class="text-center py-12">
-            <h1 class="text-4xl font-bold mb-4"> <?php
-                                                    date_default_timezone_set('Europe/Amsterdam');
-                                                    $time = date("H");
-                                                    if ($time < 12) {
-                                                        $greeting = "Goedemorgen ";
-                                                    } elseif ($time < 17) {
-                                                        $greeting = "Goedenmiddag ";
-                                                    } else {
-                                                        $greeting = "Goedenavond ";
-                                                    }
-                                                    echo $greeting ?></h1>
-            <p class="text-lg mb-6">Vers uit de oven, snel bij jou thuis!</p>
+        <section class="text-center py-12" style="background: url('images/Pizza-Achtergrond-home.jpg') no-repeat center center; background-size: cover;">
+            <h1 class="text-4xl font-bold mb-4 text-white"> <?php
+                                                            date_default_timezone_set('Europe/Amsterdam');
+                                                            $time = date("H");
+                                                            if ($time < 12) {
+                                                                $greeting = "Goedemorgen ";
+                                                            } elseif ($time < 17) {
+                                                                $greeting = "Goedenmiddag ";
+                                                            } else {
+                                                                $greeting = "Goedenavond ";
+                                                            }
+                                                            echo $greeting ?></h1>
+            <p class="text-lg mb-6 text-white">Vers uit de oven, snel bij jou thuis!</p>
             <a href="{{ url('/menu') }}" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition">
                 Menu
             </a>
@@ -77,14 +77,16 @@
 
         <!-- Popular Pizzas Section -->
         <section class="py-12">
-            <h2 class="text-3xl font-bold text-center mb-8">Populair</h2>
+            <h2 class="text-3xl font-bold text-left mb-8">Populair</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 @foreach ($pizzas as $pizza)
-                <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+                <div class="bg-[#F2EADF] overflow-hidden">
                     <img src="{{ asset($pizza->image_path) }}" alt="{{ $pizza->naam }} Pizza" class="w-full h-48 object-cover">
-                    <div class="p-4 text-center">
+                    <div class="p-4 text-center" style="background-color: #8b5e3c; color: white;">
                         <h3 class="text-xl font-bold mb-2">{{ $pizza->naam }}</h3>
-                        <a href="#" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition">
+                    </div>
+                    <div class="p-4 text-center">
+                        <a href="#" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition inline-block" style="width: auto;">
                             Bestel Nu
                         </a>
                     </div>
