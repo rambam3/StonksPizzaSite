@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,12 +16,21 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/faq', function () {
+    return view('klant.faq');
+})->name('faq');
 
-Route::get('/klant/home', function () {
-    return view('klant.home', ['user' => Auth::user()]);
-})->name('klant.home');
+route::get('/overons', function (){
+    return view('klant.overons');
+})->name('overons');
 
+
+
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/menu', [PizzaController::class, 'index'])->name('menu');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact');
+Route::post('/submit-contact', [ContactController::class, 'submit']);
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
