@@ -16,7 +16,7 @@ return new class extends Migration
             $table->foreignId('bestelling_id')->constrained('bestellingen')->onDelete('cascade');
             $table->foreignId('pizza_id')->constrained('pizzas')->onDelete('cascade');
             $table->integer('aantal');
-            $table->enum('afmeting', ['klein', 'normaal', 'groot']);
+            $table->integer('afmetingen_id');
             $table->decimal('regelprijs', 6, 2);
             $table->timestamps();
         });

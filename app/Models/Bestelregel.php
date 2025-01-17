@@ -18,6 +18,10 @@ class Bestelregel extends Model
     {
         return $this->belongsTo(Pizza::class);
     }
+    public function afmeting()
+    {
+        return $this->belongsTo(Afmeting::class);
+    }
 
     public function regelprijs()
     {
