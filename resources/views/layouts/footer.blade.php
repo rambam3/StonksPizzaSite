@@ -24,7 +24,7 @@
         <!-- Links -->
         <div class="flex space-x-8 text-lg uppercase tracking-wider md:absolute md:right-0">
             <a href="/faq" class="text-black hover:underline">Veelgestelde Vragen</a>
-            <a href="#" class="text-black hover:underline">Contact</a>
+            <a href="/contact" class="text-black hover:underline">Contact</a>
         </div>
     </div>
 </div>
