@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bestelling;
+use App\Models\Pizza;
+use App\Models\Afmeting;
 use Illuminate\Http\Request;
 
 class BestellingController extends Controller
@@ -12,10 +14,18 @@ class BestellingController extends Controller
      */
     public function index()
     {
-        Bestelling::all();
-        return view('bestellingen.index', compact('bestellingen'));
+        $pizzas = Pizza::all();
+        $pizzaAfmetingen = Afmeting::all();
+        $bezorgKosten = 0;
+        if(session()->has('bezorgKosten')){
+            $bezorgKosten = session()->get('bezorgKosten');
+        }
+        return view('klant.bestellen', compact('bezorgKosten', 'pizzas', 'pizzaAfmetingen'));
     }
-
+    public function bestelmethode()
+    {
+        return view('klant.bestelMethode');
+    }
     /**
      * Show the form for creating a new resource.
      */

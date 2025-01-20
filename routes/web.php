@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\BestellingController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\HomeController;
@@ -28,7 +30,9 @@ route::get('/overons', function (){
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
-Route::get('/menu', [PizzaController::class, 'index'])->name('menu');
+Route::get('/menu', [MenuController::class, 'index'])->name('menu');
+Route::get('/bestelmethode', [BestellingController::class, 'bestelmethode'])->name('bestelmethode');
+Route::post('/bestellen', [BestellingController::class, 'index'])->name('bestellen');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/submit-contact', [ContactController::class, 'submit']);
 
