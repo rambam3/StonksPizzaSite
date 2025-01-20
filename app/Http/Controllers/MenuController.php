@@ -19,21 +19,7 @@ class MenuController extends Controller
         $pizzas = Pizza::with('ingredienten')->get();
         return view('klant.menu', compact('pizzas'));
     }
-    public function bestelMethode()
-    {
-        return view('klant.bestelMethode');
-    }
-    public function bestellen()
-    {
-        $pizzas = Pizza::all();
-        $pizzaAfmetingen = Afmeting::all();
-        
-        $bezorgKosten = 0;
-        if(session()->has('bezorgKosten')){
-            $bezorgKosten = session()->get('bezorgKosten');
-        }
-        return view('klant.bestellen', compact('bezorgKosten', 'pizzas', 'pizzaAfmetingen'));
-    }
+
     /**
      * Show the form for creating a new resource.
      */

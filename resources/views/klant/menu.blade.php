@@ -21,7 +21,7 @@
                     
                     <p class="text-center text-white text-lg mb-4">€ {{ $pizza->prijs }}</p>
                     
-                    <a href="{{route('bestelMethode')}}" class="flex items-center justify-center text-base font-medium" style="background-color: #B2BF84; padding: 0.5rem 1rem; color: white; border-radius: 9999px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.2s ease-in-out;"
+                    <a href="{{route('bestelmethode')}}" class="flex items-center justify-center text-base font-medium" style="background-color: #B2BF84; padding: 0.5rem 1rem; color: white; border-radius: 9999px; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.2s ease-in-out;"
                         onmouseover="this.style.backgroundColor='#8c9562'; this.style.boxShadow='0 6px 8px rgba(0, 0, 0, 0.15)';"
                         onmouseout="this.style.backgroundColor='#B2BF84'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)';">
                         Bestel nu
