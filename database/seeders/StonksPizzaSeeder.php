@@ -3,6 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Hash;
+
+
 use App\Models\Bestelling;
 use App\Models\Klant;
 use App\BestelStatus;
@@ -11,6 +14,7 @@ use App\Models\Ingredient;
 use App\Models\Pizza;
 use App\Models\Bestelregel;
 use App\Models\Afmeting;
+use App\Models\User;
 
 class StonksPizzaSeeder extends Seeder
 {
@@ -132,5 +136,23 @@ class StonksPizzaSeeder extends Seeder
                 ]);
             }
         }
+
+        //Seed Users
+        user::create([
+            'name' => 'Manager',
+            'email' => 'Manager@stonkspizza.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('Stonkspizzamanager123'),
+            'rol' => 'manager'
+        ]);
+
+        user::create([
+            'name' => 'medewerker',
+            'email' => 'Medewerker@stonkspizza.com',
+            'email_verified_at' => now(),
+            'password' => Hash::make('Stonkspizzamedewerker123'),
+            'rol' => 'medewerker'
+        ]);
+
     }
 }

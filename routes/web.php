@@ -6,7 +6,6 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\BestellingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -43,6 +42,14 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware('medewerker')->group(function (){
+    Route::get('/bestelling', [BestellingController::class, 'index'])->name('bestelling');
+});
+
+
+
+
 
 
 
