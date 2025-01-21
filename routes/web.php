@@ -32,7 +32,7 @@ route::get('/overons', function (){
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
 Route::get('/bestelmethode', [BestellingController::class, 'bestelmethode'])->name('bestelmethode');
-Route::post('/bestellen', [BestellingController::class, 'index'])->name('bestellen');
+Route::get('/bestellen', [BestellingController::class, 'index'])->name('bestellen');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/submit-contact', [ContactController::class, 'submit']);
 Route::get('/bestel-methode', [BestellingController::class, 'showBestelMethode'])->name('bestelMethode');
