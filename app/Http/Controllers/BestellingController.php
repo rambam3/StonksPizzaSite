@@ -30,6 +30,15 @@ class BestellingController extends Controller
     {
         return view('klant.bestelMethode');
     }
+    public function afrekenen(Request $request)
+    {
+        $pizzaNaam = $request->input('PizzaNaam');
+        $pizzaPrijs = $request->input('PizzaPrijs');
+        $pizzaGrootte = $request->input('PizzaGrootte');
+        $pizzaAantal = $request->input('PizzaAantal');
+
+        return view('klant.afrekenen', compact('pizzaNaam', 'pizzaPrijs', 'pizzaGrootte', 'pizzaAantal'));
+    }
     /**
      * Show the form for creating a new resource.
      */
