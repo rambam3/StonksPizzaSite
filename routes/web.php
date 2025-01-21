@@ -35,12 +35,21 @@ Route::get('/bestelmethode', [BestellingController::class, 'bestelmethode'])->na
 Route::post('/bestellen', [BestellingController::class, 'index'])->name('bestellen');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/submit-contact', [ContactController::class, 'submit']);
+Route::get('/bestel-methode', [BestellingController::class, 'showBestelMethode'])->name('bestelMethode');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::middleware('medewerker')->group(function (){
+    Route::get('/bestelling', [BestellingController::class, 'index'])->name('bestelling');
+});
+
+
+
+
 
 
 

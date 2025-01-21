@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class BestellingController extends Controller
 {
+    public function showBestelMethode()
+    {
+        return view('klant.bestelMethode');
+    }
     /**
      * Display a listing of the resource.
      */
