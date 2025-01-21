@@ -6,6 +6,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\MedewerkerBestellingController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -44,7 +45,7 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::middleware('medewerker')->group(function (){
-    Route::get('/bestelling', [BestellingController::class, 'index'])->name('bestelling');
+    Route::get('/bestelling', [MedewerkerBestellingController::class, 'index'])->name('bestelling');
 });
 
 

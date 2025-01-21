@@ -17,4 +17,9 @@ class Bestelling extends Model
     {
         return $this->belongsTo(Klant::class);
     }
+
+    public function bestelregels()
+    {
+        return $this->hasMany(Bestelregel::class);
+    }
 }
