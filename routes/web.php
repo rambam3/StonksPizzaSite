@@ -36,6 +36,7 @@ Route::post('/bestellen', [BestellingController::class, 'index'])->name('bestell
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/submit-contact', [ContactController::class, 'submit']);
 Route::get('/bestel-methode', [BestellingController::class, 'showBestelMethode'])->name('bestelMethode');
+Route::post('bestellen/afrekenen', [BestellingController::class, 'afrekenen'])->name('afrekenen');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
