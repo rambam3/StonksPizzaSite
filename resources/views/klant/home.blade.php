@@ -33,7 +33,7 @@
                         <h3 class="text-xl font-bold mb-2">{{ $pizza->naam }}</h3>
                     </div>
                     <div class="p-4 text-center">
-                        <a href="#" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition inline-block" style="width: auto;">
+                        <a href="{{ url('/menu') }}" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition inline-block" style="width: auto;">
                             Bestel Nu
                         </a>
                     </div>

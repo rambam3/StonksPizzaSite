@@ -36,6 +36,7 @@ Route::get('/afrekenen', [BestellingController::class, 'afrekenen'])->name('afre
 Route::post('/bestelling-afronden', [BestellingController::class, 'store'])->name('FinishBestelling');
 Route::get('/bestelling-status/{bestelling}', [BestellingController::class, 'show'])->name('showStatus');
 
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
