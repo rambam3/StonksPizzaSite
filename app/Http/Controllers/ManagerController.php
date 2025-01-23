@@ -13,7 +13,7 @@ class ManagerController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::where('rol', '!=', 'manager')->get();
         return view('manager.index', compact('users'));
     }
 
