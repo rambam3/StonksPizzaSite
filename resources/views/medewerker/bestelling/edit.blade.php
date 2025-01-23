@@ -11,13 +11,17 @@
                     <span class="w-8 text-center text-gray-800 font-semibold">{{ $pizzaAfmeting->aantal }}x</span>
                     <span class="flex-1 text-gray-800">{{ $pizzaAfmeting->pizza_naam }}</span>
                     <span class="">
-                        <select name="pizzaAfmetingen[{{ $pizzaAfmeting->bestelregel_id }}]" class="bg-gray-100 px-2 py-1 rounded-md">
-                            @foreach ($afmetingen as $afmeting)
-                            <option value="{{ $afmeting->id }}" {{ $pizzaAfmeting->afmeting_id == $afmeting->id ? 'selected' : '' }}>
-                                {{ $afmeting->grootte }}
-                            </option>
-                            @endforeach
-                        </select>
+                        <form method="POST" action="{{ route('bestelling.update', $pizzaAfmeting->bestelregel_id) }}" class="inline">
+                            @csrf
+                            @method('PUT')
+                            <select name="pizzaAfmetingen[{{ $pizzaAfmeting->bestelregel_id }}]" class="bg-gray-100 px-2 py-1 rounded-md" onchange="this.form.submit()">
+                                @foreach ($afmetingen as $afmeting)
+                                <option value="{{ $afmeting->id }}" {{ $pizzaAfmeting->afmeting_id == $afmeting->id ? 'selected' : '' }}>
+                                    {{ $afmeting->grootte }}
+                                </option>
+                                @endforeach
+                            </select>
+                        </form>
                     </span>
                     <form method="POST" action="{{ route('bestelregel.destroy', $pizzaAfmeting->bestelregel_id) }}" style="display:inline;">
                         @csrf
@@ -44,7 +48,7 @@
                     <h3 class="font-semibold text-gray-800 mb-2">STATUS:</h3>
                     <div class="bg-gray-100 px-3 py-2 rounded-md">
                         <select name="status" class="bg-gray-100 px-3 py-1 rounded-md w-full">
-                            @foreach (App\BestelStatus::toArray() as $status)
+                            @foreach (App\Enums\BestelStatus::toArray() as $status)
                             <option value="{{ $status }}" {{ $bestelling->status == $status ? 'selected' : '' }}>
                                 {{ $status }}
                             </option>

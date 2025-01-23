@@ -15,7 +15,7 @@
                 } else {
                     $greeting = "Goedenavond ";
                 }
-                echo $greeting ?> {{$user->name }} </h1>
+                echo $greeting ?> {{ Auth::user()->name }} </h1>
             <p class="text-lg mb-6 text-white">Vers uit de oven, snel bij jou thuis!</p>
             <a href="{{ url('/menu') }}" class="bg-green-600 text-white py-2 px-4 rounded hover:bg-green-700 transition">
                 Menu

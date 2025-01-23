@@ -8,27 +8,19 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MedewerkerBestellingController;
 use App\Http\Controllers\BestelregelController;
+use App\Http\Controllers\ManagerController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::get('/faq', function () {
     return view('klant.faq');
 })->name('faq');
 
-route::get('/overons', function (){
+route::get('/overons', function () {
     return view('klant.overons');
 })->name('overons');
-
-
 
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -47,11 +39,20 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::middleware('medewerker')->group(function (){
+Route::middleware('medewerker')->group(function () {
     Route::get('bestelling/{bestelling}/edit', [MedewerkerBestellingController::class, 'edit'])->name('bestelling.edit');
     Route::put('bestelling/{bestelling}', [MedewerkerBestellingController::class, 'update'])->name('bestelling.update');
     Route::delete('bestelling/{bestelregel}', [BestelregelController::class, 'destroy'])->name('bestelregel.destroy');
     Route::get('bestelling', [MedewerkerBestellingController::class, 'index'])->name('bestelling.index');
+});
+
+Route::middleware('manager')->group(function () {
+    Route::get('manager', [ManagerController::class, 'index'])->name('manager.index');
+    Route::delete('manager/{user}', [ManagerController::class, 'destroy'])->name('manager.destroy');
+    Route::get('manager/{user}/edit', [ManagerController::class, 'edit'])->name('manager.edit');
+    Route::put('manager/{user}', [ManagerController::class, 'update'])->name('manager.update');
+    Route::get('manager/create', [ManagerController::class, 'create'])->name('manager.create');
+    Route::post('manager', [ManagerController::class, 'store'])->name('manager.store');
 });
 
 
@@ -60,4 +61,4 @@ Route::middleware('medewerker')->group(function (){
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

@@ -68,7 +68,7 @@ class BestelregelController extends Controller
      */
     public function destroy(Bestelregel $bestelregel)
     {
-        // dd($bestelregel);
+        
         $bestelregel->delete();
         return redirect()->route('bestelling.index');
     }
