@@ -1,3 +1,6 @@
+<?php 
+    $bestelling = App\Models\bestelling::find(session('bestelling_id'));
+?>
 <nav x-data="{ open: false, dropdownOpen: false }" class="bg-[#8C5B49] border-b-gray-100">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -13,9 +16,15 @@
             <!-- Center -->
             <div class="flex items-center space-x-4 hidden sm:flex">
                 <!-- Menu Link -->
-                <a href="{{ route('menu') }}" class="text-white text-xl font-semibold hover:underline"> 
-                    Menu
-                </a>
+                @if ($bestelling != null && App\Models\bestelling::Where('id', $bestelling->id)->exists())
+                    <a href="{{ route('showStatus', ['bestelling' => $bestelling->id]) }}" class="text-white text-xl font-semibold hover:underline"> 
+                        bestelling status
+                    </a>
+                    @else
+                    <a href="{{ route('menu') }}" class="text-white text-xl font-semibold hover:underline"> 
+                        Menu
+                    </a>
+                @endif
                 <!-- Over Ons Link -->
                 <a href="{{ route('overons') }}" class="text-white text-xl font-semibold hover:underline"> 
                     Over Ons
@@ -79,7 +88,6 @@
             <a href="{{ route('contact') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
                 Contact
             </a>
-
             @auth
                 <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
                     Dashboard

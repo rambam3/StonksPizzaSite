@@ -11,6 +11,7 @@ class Bestelling extends Model
 
     protected $fillable = [
         'klant_id',
+        'user_id',
         'status',
         'datum',
         'bestelMethode',

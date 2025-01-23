@@ -69,8 +69,20 @@ class BestellingController extends Controller
                 ]
             );
             $klantId = $klant->id;
-        } else {
-            $klantId = Klant::where('emailadres', auth()->user()->email)->first()->id;
+        }
+        else
+        {
+            $klant = Klant::firstOrCreate(
+                ['emailadres' => auth()->user()->email],
+                [
+                    'naam' => $request->naam,
+                    'adres' => $request->adres,
+                    'woonplaats' => $request->woonplaats,
+                    'telefoonnummer' => $request->telefoonnummer,
+                ]
+            );
+            $klantId = $klant->id;
+            $userId = auth()->user()->id;
         }
 
         $bestelMethode = BestelMethode::tryFrom($request->bestelMethode);
@@ -78,8 +90,10 @@ class BestellingController extends Controller
             $bestelMethode = BestelMethode::afhalen;
         }
 
+
         $bestelling = Bestelling::create([
             'klant_id' => $klantId,
+            'user_id' => $userId ?? null,
             'totaalPrijs' => $totaalPrijs,
             'datum' => now(),
             'status' => BestelStatus::Betaald,
@@ -104,14 +118,17 @@ class BestellingController extends Controller
                 'updated_at' => now(),
             ]);
         }
-        
-        return view('klant.bestellingStatus', compact('bestelling'));
+        session(['bestelling_id' => $bestelling->id]);
+        return redirect()->route('showStatus', [ 'bestelling' => $bestelling->id]);
     }
     /**
      * Display the specified resource.
      */
     public function show(Bestelling $bestelling)
     {
+        if (!Bestelling::where('id', $bestelling->id)->exists()) {
+           return view('klant.home', ['error' => 'Bestelling niet gevonden']);
+        }
         return view('klant.bestellingStatus', compact('bestelling'));
     }
 

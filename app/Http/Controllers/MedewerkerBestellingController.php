@@ -49,8 +49,7 @@ class MedewerkerBestellingController extends Controller
 
         $afmetingen = DB::table('afmetingen')->select('id', 'grootte')->get();
         $pizzas = Pizza::all();
-
-        return view('medewerker.bestelling.edit', compact('bestelling', 'pizzaAfmetingen', 'afmetingen', 'pizzas'));
+        return view('medewerker.bestelling.edit', compact('bestelling', 'pizzaAfmetingen', 'afmetingen', 'pizzas',));
     }
 
     /**
@@ -60,36 +59,31 @@ class MedewerkerBestellingController extends Controller
     {
         $bestelling->status = $request->input('status');
         $bestelling->save();
-
-        foreach ($request->input('pizzaAfmetingen', []) as $bestelregel_id => $afmeting_id) {
-            $bestelregel = Bestelregel::find($bestelregel_id);
-            $bestelregel->afmetingen_id = $afmeting_id;
-            $bestelregel->save();
-        }
-
-        if ($request->has('newPizza')) {
-            foreach ($request->input('newPizza[aantal]') as $index => $aantal) {
-                $pizza_id = $request->input('newPizza[namen]')[$index];
-                $afmeting_id = $request->input('newPizza[afmetingen]')[$index];
-    
-                Bestelregel::create([
-                    'bestelling_id' => $bestelling->id,
-                    'pizza_id' => $pizza_id,
-                    'afmetingen_id' => $afmeting_id,
-                    'aantal' => $aantal,
-                ]);
-            }
-        }
-    
-        return redirect()->route('bestelling.edit', $bestelling->id)->with('success', 'Bestelling updated successfully');
+        return redirect()->route('bestelling.index', $bestelling->id)->with('success', 'Bestelling updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bestelling $bestelling)
+    public function destroy(Request $request)
     {
+        // Find the bestelling
+        $bestelling = Bestelling::find($request->bestelling_id);
+    
+        // If no bestelling is found, redirect with an error
+        if (!$bestelling) {
+            return redirect()->route('bestelling.index')->with('error', 'Bestelling niet gevonden.');
+        }
+    
+        // Delete associated bestelregels
+        $bestelling->bestelregels()->delete();
+    
+        // Delete the bestelling itself
         $bestelling->delete();
-        return redirect()->route('bestelling.index');
+
+        $request->session()->forget('bestelling_' . $bestelling->id);
+
+        // Redirect with success message
+        return redirect()->route('bestelling.index')->with('success', 'Bestelling succesvol verwijderd.');
     }
 }
