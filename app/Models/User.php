@@ -31,6 +31,7 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
         'remember_token',
+        'rol'
     ];
 
     /**
@@ -44,5 +45,15 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isManager(): bool
+    {
+        return $this->rol === 'manager';
+    }
+
+    public function isMedewerker(): bool
+    {
+        return $this->rol === 'medewerker';
     }
 }
