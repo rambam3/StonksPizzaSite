@@ -12,8 +12,10 @@
                 </ul>
                 <p class="font-bold text-center">Status: <span class="text-gray-700">{{ $bestelling->status }}</span></p>
                 <div class="mt-4 flex justify-between">
-                    <button class="bg-red-500 text-red-500 px-4 py-2 rounded hover:bg-red-600">Verwijder</button>
-                    <button class="bg-gray-600 text-gray-500 px-4 py-2 rounded hover:bg-gray-700">Wijzig</button>
+                    <button class="bg-red-500 text-red-500 px-4 py-2 rounded border ">Verwijder</button>
+                    <form action="{{ route('bestelling.edit', ['bestelling' => $bestelling->id]) }}" method="GET">
+                        <button type="submit" class="bg-gray-600 text-gray-500 px-4 py-2 rounded border  ">Wijzig</button>
+                    </form>
                 </div>
             </div>
             @endforeach
