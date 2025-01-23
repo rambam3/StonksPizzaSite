@@ -3,12 +3,19 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use App\BestelStatus;
+use App\Enums\BestelStatus;
 
 class Bestelling extends Model
 {
     protected $table = 'bestellingen';
-    
+
+    protected $fillable = [
+        'klant_id',
+        'status',
+        'datum',
+        'bestelMethode',
+        'totaalPrijs',
+    ];
     protected $casts = [
         'status' => BestelStatus::class,
     ];

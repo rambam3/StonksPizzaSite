@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Enums;
 
 enum BestelStatus : string
 {
@@ -11,6 +11,8 @@ enum BestelStatus : string
     case Inoven = 'Inoven';
     case Onderweg = 'Onderweg';
     case Bezorgd = 'Bezorgd';
+    case Afgehaald = 'Afgehaald';
+    
 
     public static function toArray(): array
     {

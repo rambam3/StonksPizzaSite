@@ -51,6 +51,10 @@ function updateBestelling(pizzaNaam, grootte, aantal, totaalprijs) {
     const bestellingId = `${pizzaNaam}-${grootte}`.replace(/\s+/g, '-').toLowerCase();
     let bestaandeBestelling = document.getElementById(bestellingId);
 
+    // Get bezorgkosten from the data-cost attribute
+    const bezorgKostenElement = document.querySelector('.bezorgkosten-amount');
+    const bezorgKosten = parseFloat(bezorgKostenElement.dataset.cost) || 0;
+
     if (bestaandeBestelling) {
         // Update de bestaande bestelling
         const aantalElement = bestaandeBestelling.querySelector('.bestelling-aantal');
@@ -58,8 +62,11 @@ function updateBestelling(pizzaNaam, grootte, aantal, totaalprijs) {
 
         const nieuwAantal = parseInt(aantalElement.textContent) + aantal;
         aantalElement.textContent = nieuwAantal + "x";
-        totaalElement.textContent = "€" + (totaalprijs + parseFloat(totaalElement.dataset.total)).toFixed(2);
-        totaalElement.dataset.total = (totaalprijs + parseFloat(totaalElement.dataset.total)).toFixed(2);
+
+        // Update the total with bezorgKosten
+        const newTotal = totaalprijs + parseFloat(totaalElement.dataset.total);
+        totaalElement.textContent = "€" + (newTotal + bezorgKosten).toFixed(2);
+        totaalElement.dataset.total = (newTotal + bezorgKosten).toFixed(2);
     } else {
         // Voeg een nieuwe bestelling toe
         const bestellingHTML = `
@@ -78,6 +85,9 @@ function updateBestelling(pizzaNaam, grootte, aantal, totaalprijs) {
         `;
         bestellingContainer.innerHTML += bestellingHTML;
     }
+
+    // Update the total price in the summary
+    updateTotaalPrijs();
 }
 
 // Functie om een bestelling te verwijderen
@@ -105,15 +115,31 @@ function updateTotaalPrijs() {
 
     // Update the totaal section
     const totaalElement = document.querySelector('.totaal-prijs');
+    const hiddenTotaalPrijs = document.getElementById('hiddenTotaalPrijs');
     if (totaalElement) {
         totaalElement.textContent = `Totaal: € ${(totaalPrijs + bezorgKosten).toFixed(2)}`;
+        hiddenTotaalPrijs.value = (totaalPrijs + bezorgKosten).toFixed(2);
     }
 }
-function plaatsBestelling( pizzaNaam, grootte, aantal, prijs){
-    document.getElementById('hiddenPizzaNaam').value = pizzaNaam;
-    document.getElementById('hiddenGrootte').value = grootte;
-    document.getElementById('hiddenAantal').value = aantal;
-    document.getElementById('hiddenPrijs').value = prijs;
+function plaatsBestelling(pizzaNaam, grootte, aantal, prijs) {
+    // Zorg dat deze velden altijd worden bijgewerkt bij het klikken op Afrekenen
+    const bestellingregel = {
+        naam: pizzaNaam,
+        grootte: grootte,
+        aantal: aantal,
+        prijs: prijs * aantal,
+    };
+
+    // Zorg dat deze velden een array bevatten
+    const hiddenBestellingregel = document.getElementById('hiddenBestellingregel');
+    const huidigeBestellingregel= hiddenBestellingregel.value ? JSON.parse(hiddenBestellingregel.value) : [];
+    huidigeBestellingregel.push(bestellingregel);
+
+    hiddenBestellingregel.value = JSON.stringify(huidigeBestellingregel);
+
+    // Update totaalprijs met eventuele bezorgkosten
+    updateTotaalPrijs();
+
 }
 
 

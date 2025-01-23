@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Enums\BestelMethode;
 use App\Models\Bestelling;
+use App\Models\Bestelregel;
 use App\Models\Pizza;
 use App\Models\Afmeting;
 use Illuminate\Http\Request;
+use App\Models\Klant;
+use App\Enums\BestelStatus;
 
 class BestellingController extends Controller
 {
@@ -26,18 +30,19 @@ class BestellingController extends Controller
         }
         return view('klant.bestellen', compact('bezorgKosten', 'pizzas', 'pizzaAfmetingen'));
     }
+    public function afrekenen(Request $request)
+    {
+  
+        $bestellingregels = json_decode($request->input('bestellingregel', []), true);
+
+        $totaalPrijs = $request->input('totaalPrijs');
+        $bezorgKosten = $request->input('bezorgKosten');
+        $bestelMethode = $request->input('bestelMethode');
+        return view('klant.afrekenen', compact('bestellingregels', 'totaalPrijs', 'bezorgKosten', 'bestelMethode'));
+    }
     public function bestelmethode()
     {
         return view('klant.bestelMethode');
-    }
-    public function afrekenen(Request $request)
-    {
-        $pizzaNaam = $request->input('PizzaNaam');
-        $pizzaPrijs = $request->input('PizzaPrijs');
-        $pizzaGrootte = $request->input('PizzaGrootte');
-        $pizzaAantal = $request->input('PizzaAantal');
-
-        return view('klant.afrekenen', compact('pizzaNaam', 'pizzaPrijs', 'pizzaGrootte', 'pizzaAantal'));
     }
     /**
      * Show the form for creating a new resource.
@@ -52,16 +57,62 @@ class BestellingController extends Controller
      */
     public function store(Request $request)
     {
-        Bestelling::create($request->all());
-        return redirect()->route('bestellingen.index');
-    }
+        $totaalPrijs = $request->totaalPrijs;
+        if (auth()->user() == null) {
+            $klant = Klant::firstOrCreate(
+                ['emailadres' => $request->email],
+                [
+                    'naam' => $request->naam,
+                    'adres' => $request->adres,
+                    'woonplaats' => $request->woonplaats,
+                    'telefoonnummer' => $request->telefoonnummer,
+                ]
+            );
+            $klantId = $klant->id;
+        } else {
+            $klantId = Klant::where('emailadres', auth()->user()->email)->first()->id;
+        }
 
+        $bestelMethode = BestelMethode::tryFrom($request->bestelMethode);
+        if (!$bestelMethode) {
+            $bestelMethode = BestelMethode::afhalen;
+        }
+
+        $bestelling = Bestelling::create([
+            'klant_id' => $klantId,
+            'totaalPrijs' => $totaalPrijs,
+            'datum' => now(),
+            'status' => BestelStatus::Betaald,
+            'bestelMethode' => $bestelMethode,
+        ]);
+        $bestellingregels = json_decode($request->input('bestellingregels'), true);
+        foreach ($bestellingregels as $bestellingregel) {
+            $pizza = Pizza::where('naam', $bestellingregel['naam'])->first();
+            $afmeting = Afmeting::where('grootte', $bestellingregel['grootte'])->first();
+            $pizzaId = $pizza->id;
+            $afmetingId = $afmeting->id;
+            $aantal = $bestellingregel['aantal'];
+            $prijs = $bestellingregel['prijs'];
+
+            $bestelregel = Bestelregel::create([
+                'bestelling_id' => $bestelling->id,
+                'pizza_id' => $pizzaId,
+                'afmetingen_id' => $afmetingId,
+                'aantal' => $aantal,
+                'regelprijs' => $prijs,
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
+        
+        return view('klant.bestellingStatus', compact('bestelling'));
+    }
     /**
      * Display the specified resource.
      */
     public function show(Bestelling $bestelling)
     {
-        return view('bestellingen.show', compact('bestelling'));
+        return view('klant.bestellingStatus', compact('bestelling'));
     }
 
     /**

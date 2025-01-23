@@ -8,7 +8,16 @@ else
 {
     $bezorgKosten = 0;
 }
-$bestellingId = 0;
+
+if($bezorgKosten > 0)
+{
+    $bestelMethode = "bezorging";
+}
+else
+{
+    $bestelMethode = "afhalen";
+}
+
 ?>
 <script src="js/bestelling.js"></script>
     <div class="py-12">
@@ -58,33 +67,27 @@ $bestellingId = 0;
             </div>
             @endforeach
         </div>
-        <form action="{{route('afrekenen')}}" method="POST" class="flex justify-center flex-col w-full bg-[#8C5B49] p-4 mx-8 h-min border-2 border-black rounded-lg shadow-lg ">
+        <form action="{{route('afrekenen')}}" method="get" class="flex justify-center flex-col w-full bg-[#8C5B49] p-4 mx-8 h-min border-2 border-black rounded-lg shadow-lg ">
             @csrf
-            @method('POST')
             <h1 class="text-4xl font-bold text-white">Uw Bestelling</h1>
             <div class="bestelling-lijst"></div>
             <div class="mt-4 text-white">
-                <p class="bezorgkosten-display">Bezorgkosten: € <span class="bezorgkosten-amount" data-cost="<?= $bezorgKosten; ?>"><?= number_format($bezorgKosten, 2); ?></span></p>
+                <p class="bezorgkosten-display">Bezorgkosten: € <span class="bezorgkosten-amount" data-cost="{{ $bezorgKosten }}">{{ $bezorgKosten }}</span></p>
                 <h2 class="totaal-prijs">Totaal: € 0.00</h2>
             </div>
-
-            @foreach ($bestelling_id as $bestelling)
-                <input type="hidden" name="bestelling_id[]" value="{{ $bestelling->id }}">
-                <input type="hidden" name="PizzaNaam[]" value="{{ $bestelling->pizza_naam }}">
-                <input type="hidden" name="PizzaPrijs[]" value="{{ $bestelling->pizza_prijs }}">
-                <input type="hidden" name="PizzaGrootte[]" value="{{ $bestelling->pizza_grootte }}">
-                <input type="hidden" name="PizzaAantal[]" value="{{ $bestelling->pizza_aantal }}">
-            @endforeach
-
             <button type="submit"
                     class="flex items-center justify-center text-base font-medium mt-4"
                     style="background-color: #B2BF84; padding: 0.5rem 1rem; color: white; border-radius: 9999px; 
                            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: all 0.2s ease-in-out;"
                     onmouseover="this.style.backgroundColor='#8c9562'; this.style.boxShadow='0 6px 8px rgba(0, 0, 0, 0.15)';"
                     onmouseout="this.style.backgroundColor='#B2BF84'; this.style.boxShadow='0 4px 6px rgba(0, 0, 0, 0.1)';">
-                afrekenen
+                Afrekenen
             </button>
 
+            <input type="hidden" id="hiddenBestellingregel" name="bestellingregel" value="[]">
+            <input type="hidden" id="hiddenBezorgkosten" name="bezorgKosten" value="{{$bezorgKosten}}">
+            <input type="hidden" id="hiddenTotaalPrijs" name="totaalPrijs" value="">
+            <input type="hidden" id="hiddenBestelMethode" name="bestelMethode" value="{{$bestelMethode}}">
         </form>
     </section>
 </x-app-layout>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Hash;
 
 use App\Models\Bestelling;
 use App\Models\Klant;
-use App\BestelStatus;
+use App\Enums\BestelStatus;
 use Carbon\Carbon;
 use App\Models\Ingredient;
 use App\Models\Pizza;
@@ -122,9 +122,14 @@ class StonksPizzaSeeder extends Seeder
         // Seed Bestelregels
         $bestellingen = Bestelling::all();
         $pizzas = Pizza::all();
+        $counter = 0;
 
         foreach ($bestellingen as $bestelling) {
             foreach ($pizzas as $pizza) {
+                $counter++;
+                if ($counter > 10) {
+                    break;
+                }
                 $aantal = rand(1, 5);
                 Bestelregel::create([
                     'bestelling_id' => $bestelling->id,
