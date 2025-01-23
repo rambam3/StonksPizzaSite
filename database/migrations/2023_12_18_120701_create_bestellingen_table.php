@@ -3,7 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use \app\Models\BestelStatus;
+use App\Enums\BestelMethode;
 
 return new class extends Migration
 {
@@ -17,6 +17,8 @@ return new class extends Migration
             $table->foreignId('klant_id')->constrained('klanten')->onDelete('cascade');
             $table->date('datum');
             $table->string('status');
+            $table->enum('bestelMethode', BestelMethode::getValues());
+            $table->decimal('totaalPrijs', 6, 2)->default(0);
             $table->timestamps();
         });
     }

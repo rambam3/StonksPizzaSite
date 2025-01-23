@@ -14,10 +14,10 @@ return new class extends Migration
         Schema::create('klanten', function (Blueprint $table) {
             $table->id();
             $table->string('naam');
-            $table->string('adres');
-            $table->string('woonplaats');
+            $table->string('adres') ->nullable();
+            $table->string('woonplaats')->nullable();
             $table->string('telefoonnummer');
-            $table->string('emailadres');
+            $table->string('emailadres')->unique();
             $table->timestamps();
         });
     }

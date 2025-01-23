@@ -6,9 +6,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Bestelregel extends Model
 {
-    protected $fillable = ['bestelling_id', 'pizza_id', 'aantal', 'afmeting',];
-    protected $readonly = ['regelprijs'];
-
+    protected $table = 'bestelregels';
+    protected $fillable = ['bestelling_id', 'pizza_id', 'aantal', 'afmetingen_id','regelprijs'];
+ 
     public function bestelling()
     {
         return $this->belongsTo(Bestelling::class);
