@@ -25,13 +25,16 @@ route::get('/overons', function () {
 
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/menu', [MenuController::class, 'index'])->name('menu');
-Route::get('/bestelmethode', [BestellingController::class, 'bestelmethode'])->name('bestelmethode');
-Route::post('/bestellen', [BestellingController::class, 'index'])->name('bestellen');
 Route::get('/contact', [ContactController::class, 'index'])->name('contact');
 Route::post('/submit-contact', [ContactController::class, 'submit']);
+
+Route::get('/bestelmethode', [BestellingController::class, 'bestelmethode'])->name('bestelmethode');
+Route::post('/bestellen', [BestellingController::class, 'index'])->name('bestellen');
+
 Route::get('/bestel-methode', [BestellingController::class, 'showBestelMethode'])->name('bestelMethode');
 Route::get('/afrekenen', [BestellingController::class, 'afrekenen'])->name('afrekenen');
-Route::post('/bestelling-status', [BestellingController::class, 'store'])->name('bestellingStatus');
+Route::post('/bestelling-afronden', [BestellingController::class, 'store'])->name('FinishBestelling');
+Route::get('/bestelling-status/{bestelling}', [BestellingController::class, 'show'])->name('showStatus');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -42,7 +45,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware('medewerker')->group(function () {
     Route::get('bestelling/{bestelling}/edit', [MedewerkerBestellingController::class, 'edit'])->name('bestelling.edit');
     Route::put('bestelling/{bestelling}', [MedewerkerBestellingController::class, 'update'])->name('bestelling.update');
-    Route::delete('bestelling/{bestelregel}', [BestelregelController::class, 'destroy'])->name('bestelregel.destroy');
+    Route::delete('bestelling-delete', [MedewerkerBestellingController::class, 'destroy'])->name('bestelling.destroy');
     Route::get('bestelling', [MedewerkerBestellingController::class, 'index'])->name('bestelling.index');
 });
 

@@ -1,6 +1,6 @@
 <x-app-layout>
     <section class="flex flex-col items-center h-screen space-y-8 mt-12">
-        <form class="flex flex-col bg-[#8C5B49] w-1/2 mx-auto p-8 gap-3 text-center mt-4 mb-6 rounded-2xl shadow-xl border border-black-300" action="{{ route('bestellingStatus') }}" method="post">
+        <form class="flex flex-col bg-[#8C5B49] w-1/2 mx-auto p-8 gap-3 text-center mt-4 mb-6 rounded-2xl shadow-xl border border-black-300" action="{{ route('FinishBestelling') }}" method="post">
             @csrf
             @method('POST')
             @foreach ($bestellingregels as $bestellingregel )
@@ -20,7 +20,12 @@
                 <input type="text" name="woonplaats" placeholder="woonplaats" class="shadow-inner p-2 rounded">
             @endif
             <input type="text" name="telefoonnummer" placeholder="telefoonnummer" class="shadow-inner p-2 rounded">
-            <input type="email" name="email" placeholder="email" class="shadow-inner p-2 rounded">
+            @if (auth()->user())
+                <input type="hidden" name="klant_id" value="{{ auth()->user()->id }}">
+                <input type="email" name="email" value="{{ auth()->user()->email }}" class="shadow-inner p-2 rounded" readonly>
+            @else
+                <input type="email" name="email" placeholder="email" class="shadow-inner p-2 rounded">
+            @endif
             <button type="submit"
                 class=  "flex items-center justify-center text-base font-medium bg-[#B2BF84] py-2 px-4 text-white rounded-full 
                     shadow-md transition ease-in-out duration-200" 

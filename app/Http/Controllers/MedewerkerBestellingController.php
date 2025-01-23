@@ -47,8 +47,8 @@ class MedewerkerBestellingController extends Controller
             ->get();
 
         $afmetingen = DB::table('afmetingen')->select('id', 'grootte')->get();
-
-        return view('medewerker.bestelling.edit', compact('bestelling', 'pizzaAfmetingen', 'afmetingen'));
+        $pizzas = Pizza::all();
+        return view('medewerker.bestelling.edit', compact('bestelling', 'pizzaAfmetingen', 'afmetingen', 'pizzas',));
     }
 
     /**
@@ -58,16 +58,31 @@ class MedewerkerBestellingController extends Controller
     {
         $bestelling->status = $request->status;
         $bestelling->save();
-
-        return redirect()->route('bestelling.index');
+        return redirect()->route('bestelling.index', $bestelling->id)->with('success', 'Bestelling updated successfully');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Bestelling $bestelling)
+    public function destroy(Request $request)
     {
+        // Find the bestelling
+        $bestelling = Bestelling::find($request->bestelling_id);
+    
+        // If no bestelling is found, redirect with an error
+        if (!$bestelling) {
+            return redirect()->route('bestelling.index')->with('error', 'Bestelling niet gevonden.');
+        }
+    
+        // Delete associated bestelregels
+        $bestelling->bestelregels()->delete();
+    
+        // Delete the bestelling itself
         $bestelling->delete();
-        return redirect()->route('bestelling.index');
+
+        $request->session()->forget('bestelling_' . $bestelling->id);
+
+        // Redirect with success message
+        return redirect()->route('bestelling.index')->with('success', 'Bestelling succesvol verwijderd.');
     }
 }
