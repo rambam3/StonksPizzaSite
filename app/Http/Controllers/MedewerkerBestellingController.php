@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bestelling;
-use App\Models\Bestelregel;
 use App\Models\Pizza;
 use App\Models\Afmeting;
 use Illuminate\Http\Request;
@@ -48,9 +47,8 @@ class MedewerkerBestellingController extends Controller
             ->get();
 
         $afmetingen = DB::table('afmetingen')->select('id', 'grootte')->get();
-        $pizzas = Pizza::all();
 
-        return view('medewerker.bestelling.edit', compact('bestelling', 'pizzaAfmetingen', 'afmetingen', 'pizzas'));
+        return view('medewerker.bestelling.edit', compact('bestelling', 'pizzaAfmetingen', 'afmetingen'));
     }
 
     /**
@@ -58,30 +56,10 @@ class MedewerkerBestellingController extends Controller
      */
     public function update(Request $request, Bestelling $bestelling)
     {
-        $bestelling->status = $request->input('status');
+        $bestelling->status = $request->status;
         $bestelling->save();
 
-        foreach ($request->input('pizzaAfmetingen', []) as $bestelregel_id => $afmeting_id) {
-            $bestelregel = Bestelregel::find($bestelregel_id);
-            $bestelregel->afmetingen_id = $afmeting_id;
-            $bestelregel->save();
-        }
-
-        if ($request->has('newPizza')) {
-            foreach ($request->input('newPizza[aantal]') as $index => $aantal) {
-                $pizza_id = $request->input('newPizza[namen]')[$index];
-                $afmeting_id = $request->input('newPizza[afmetingen]')[$index];
-    
-                Bestelregel::create([
-                    'bestelling_id' => $bestelling->id,
-                    'pizza_id' => $pizza_id,
-                    'afmetingen_id' => $afmeting_id,
-                    'aantal' => $aantal,
-                ]);
-            }
-        }
-    
-        return redirect()->route('bestelling.edit', $bestelling->id)->with('success', 'Bestelling updated successfully');
+        return redirect()->route('bestelling.index');
     }
 
     /**
