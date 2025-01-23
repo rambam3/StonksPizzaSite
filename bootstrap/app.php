@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use App\Http\Middleware\MedewerkerMiddleware;
+use App\Http\Middleware\ManagerMiddleware;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -14,6 +15,11 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias(['medewerker' => MedewerkerMiddleware::class]);
     })
+    ->withMiddleware(function (Middleware $middleware) {
+        $middleware->alias(['manager' => ManagerMiddleware::class]);
+    })
+
+
     ->withExceptions(function (Exceptions $exceptions) {
         //
     })->create();

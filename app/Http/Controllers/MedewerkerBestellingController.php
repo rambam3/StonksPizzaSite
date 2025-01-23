@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bestelling;
-use App\Models\Bestelregel;
 use App\Models\Pizza;
 use App\Models\Afmeting;
 use Illuminate\Http\Request;
@@ -57,7 +56,7 @@ class MedewerkerBestellingController extends Controller
      */
     public function update(Request $request, Bestelling $bestelling)
     {
-        $bestelling->status = $request->input('status');
+        $bestelling->status = $request->status;
         $bestelling->save();
         return redirect()->route('bestelling.index', $bestelling->id)->with('success', 'Bestelling updated successfully');
     }
