@@ -12,7 +12,7 @@
 
             <!-- Center -->
             <div class="flex items-center space-x-4 hidden sm:flex">
-                @if(!Auth::user()->isManager())
+                @if (!Auth::check() || !Auth::user()->isManager())
                 <!-- Menu Link -->
                 <a href="{{ route('menu') }}" class="text-white text-xl font-semibold hover:underline">
                     Menu
@@ -27,14 +27,14 @@
                 </a>
                 @endif
 
-                @if(Auth::user()->isMedewerker())
+                @if(Auth::check() && Auth::user()->isMedewerker())
                 <a href="{{ route('bestelling.index') }}" class="text-white text-xl font-semibold hover:underline">
                     Bestellingen
                 </a>
                 @endif
 
                 <!-- Manager Links -->
-                @if(Auth::user()->isManager())
+                @if(Auth::check() && Auth::user()->isManager())
                 <a href="{{ route('bestelling.index') }}" class="text-white text-xl font-semibold hover:underline">
                     Bestellingen
                 </a>
@@ -53,9 +53,6 @@
                         Profiel
                     </a>
                     <div x-show="dropdownOpen" class="absolute right-0 mt-2 w-48 bg-white rounded-md shadow-lg py-1 z-20" style="display: none;">
-                        <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
-                            {{ __('Profile') }}
-                        </a>
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
                             <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">
@@ -86,32 +83,26 @@
 
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden bg-[#c79976]">
         <div class="pt-2 pb-3 space-y-1">
-            @if(!Auth::user()->isManager())
-            <a href="{{ route('menu') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
+            @if (!Auth::check() || !Auth::user()->isManager())
+            <a href="{{ route('menu') }}" class="text-white text-xl font-semibold hover:underline">
                 Menu
             </a>
-            <a href="{{ route('overons') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
+            <a href="{{ route('overons') }}" class="text-white text-xl font-semibold hover:underline">
                 Over Ons
             </a>
-            <a href="{{ route('contact') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
+            <a href="{{ route('contact') }}" class="text-white text-xl font-semibold hover:underline">
                 Contact
             </a>
             @endif
 
-            @if(Auth::user()->isMedewerker())
+            @if(Auth::check() && Auth::user()->isMedewerker())
             <a href="{{ route('bestelling.index') }}" class="text-white text-xl font-semibold hover:underline">
                 Bestellingen
             </a>
             @endif
 
             @auth
-            <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
-                Dashboard
-            </a>
-            <a href="{{ route('dashboard') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
-                Profiel
-            </a>
-            @if(Auth::user()->isManager())
+            @if (Auth::check() && Auth::user()->isManager())
             <a href="{{ route('bestelling.index') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
                 {{ __('Bestellingen') }}
             </a>
