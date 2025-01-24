@@ -40,6 +40,12 @@
                 <a href="{{ route('bestelling.index') }}" class="text-white text-xl font-semibold hover:underline">
                     Bestellingen
                 </a>
+                <a href="{{ route('ingredienten.index') }}" class="text-white text-xl font-semibold hover:underline">
+                    Ingredienten
+                </a>
+                <a href="{{ route('pizzas.index') }}" class="text-white text-xl font-semibold hover:underline">
+                    Pizza's
+                </a>
                 @endif
 
                 <!-- Manager Links -->
@@ -49,6 +55,12 @@
                 </a>
                 <a href="{{ route('manager.index') }}" class="text-white text-xl font-semibold hover:underline">
                     Medewerkers
+                </a>
+                <a href="{{ route('ingredienten.index') }}" class="text-white text-xl font-semibold hover:underline">
+                    Ingredienten
+                </a>
+                <a href="{{ route('pizzas.index') }}" class="text-white text-xl font-semibold hover:underline">
+                    Pizza's
                 </a>
                 @endif
             </div>
@@ -118,6 +130,10 @@
             <a href="{{ route('manager.index') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
                 {{ __('Medewerkers') }}
             </a>
+            <a href="{{ route('ingredienten.index') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
+                {{ __('Ingredienten') }}
+            </a>
+            
             @endif
             <form method="POST" action="{{ route('logout') }}" class="block px-4 py-2 text-white text-lg font-semibold hover:underline">
                 @csrf

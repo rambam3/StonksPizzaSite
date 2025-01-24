@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Bestelling;
 use App\Models\Pizza;
 use App\Models\Afmeting;
+use App\Models\Klant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -76,11 +77,13 @@ class MedewerkerBestellingController extends Controller
     
         // Delete associated bestelregels
         $bestelling->bestelregels()->delete();
+        $bestelling->klant()->delete(); 
     
         // Delete the bestelling itself
         $bestelling->delete();
 
         $request->session()->forget('bestelling_' . $bestelling->id);
+
 
         // Redirect with success message
         return redirect()->route('bestelling.index')->with('success', 'Bestelling succesvol verwijderd.');

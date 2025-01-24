@@ -5,7 +5,7 @@
 
 
 <x-guest-layout>
-    <div class="bg-[#5a4033] opacity-70 p-8 rounded-lg shadow-lg w-96">
+    <div class="bg-[#5a4033] opacity-70 p-7 rounded-lg shadow-lg w-96">
         <h1 class="text-7xl text-center text-white font-bold mb-6">Login</h1>
 
         <x-auth-session-status class="mb-4" :status="session('status')" />
@@ -48,6 +48,9 @@
                 <!-- Register knop -->
                 <a href="{{ route('register') }}" class="text-lg font-bold bg-[#B2BF84] py-2 px-7  rounded-md hover:bg-[#8c9562]">
                     {{ __('Registreer') }}
+                </a>
+                <a href="{{route("home")}}" class="text-sm text-gray-300 hover:text-gray-100 mt-4">
+                    doorgaan zonder account
                 </a>
             </div>
         </form>

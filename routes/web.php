@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\BestellingController;
+use App\Http\Controllers\IngredientController;
 use App\Http\Controllers\MenuController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PizzaController;
@@ -9,6 +10,7 @@ use App\Http\Controllers\ContactController;
 use App\Http\Controllers\MedewerkerBestellingController;
 use App\Http\Controllers\BestelregelController;
 use App\Http\Controllers\ManagerController;
+use App\Models\Ingredient;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
@@ -47,6 +49,20 @@ Route::middleware('medewerker')->group(function () {
     Route::put('bestelling/{bestelling}', [MedewerkerBestellingController::class, 'update'])->name('bestelling.update');
     Route::delete('bestelling-delete', [MedewerkerBestellingController::class, 'destroy'])->name('bestelling.destroy');
     Route::get('bestelling', [MedewerkerBestellingController::class, 'index'])->name('bestelling.index');
+
+    Route::get('ingredienten', [IngredientController::class, 'index'])->name('ingredienten.index');
+    Route::get('ingredienten/create', [IngredientController::class, 'create'])->name('ingredienten.create');
+    Route::post('ingredienten', [IngredientController::class, 'store'])->name('ingredienten.store');
+    Route::get('ingredienten/{ingredient}/edit', [IngredientController::class, 'edit'])->name('ingredienten.edit');
+    Route::put('ingredienten/{ingredient}', [IngredientController::class, 'update'])->name('ingredienten.update');
+    Route::delete('ingredienten/{ingredient}', [IngredientController::class, 'destroy'])->name('ingredienten.destroy');
+
+    Route::get('pizzas', [PizzaController::class, 'index'])->name('pizzas.index');
+    Route::get('pizzas/create', [PizzaController::class, 'create'])->name('pizzas.create');
+    Route::post('pizzas', [PizzaController::class, 'store'])->name('pizzas.store');
+    Route::get('pizzas/{pizza}/edit', [PizzaController::class, 'edit'])->name('pizzas.edit');
+    Route::put('pizzas/{pizza}', [PizzaController::class, 'update'])->name('pizzas.update');
+    Route::delete('pizzas/{pizza}', [PizzaController::class, 'destroy'])->name('pizzas.destroy');
 });
 
 Route::middleware('manager')->group(function () {

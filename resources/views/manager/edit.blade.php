@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto p-4">
+    <div class="container mx-auto p-4 h-screen">
         <h1 class="text-2xl font-bold mb-4 text-center">Edit Medewerker</h1>
         <form action="{{ route('manager.update', $user->id) }}" method="POST">
             @csrf
