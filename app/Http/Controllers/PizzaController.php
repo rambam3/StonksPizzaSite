@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Pizza;
 use Illuminate\Http\Request;
+use App\Models\Ingredient;
+use App\Models\Pizza_Ingredient;
 
 
 class PizzaController extends Controller
@@ -13,8 +15,8 @@ class PizzaController extends Controller
      */
     public function index()
     {
-        $pizzas = Pizza::all();
-        return view('klant.menu', compact('pizzas'));
+        $pizzas = Pizza::with('ingredienten')->get();
+        return view('medewerker.pizzas.index', compact('pizzas'));
     }
 
     /**
@@ -22,7 +24,8 @@ class PizzaController extends Controller
      */
     public function create()
     {
-        return view('pizzas.create');
+        $ingredienten = Ingredient::all();
+        return view('medewerker.pizzas.create', compact('ingredienten'));
     }
 
     /**
@@ -30,8 +33,21 @@ class PizzaController extends Controller
      */
     public function store(Request $request)
     {
-        $imagePath = $request->file('afbeelding')->store('images/pizzas', 'public');
-        Pizza::create($request->all());
+        $ingredienten = $request->ingredienten;
+        $prijs = 0;
+        foreach ($ingredienten as $ingredient) {
+            $prijs += Ingredient::find($ingredient)->prijs;
+        }
+
+        $path = $request->file('afbeelding')->store('images/pizzas', 'public');
+        $pathArray = explode('/', $path);
+        $imgPath = 'storage/' . $pathArray[1] . '/' . $pathArray[2];
+
+        Pizza::create([
+            'naam' => $request->name,
+            'prijs' => $prijs,
+            'image_path' => $imgPath,
+        ]);
         return redirect()->route('pizzas.index');
     }
 
@@ -67,6 +83,10 @@ class PizzaController extends Controller
      */
     public function destroy(Pizza $pizza)
     {
+        $image_path = $pizza->image_path;
+        if (file_exists(public_path($image_path))) {
+            unlink(public_path($image_path));
+        }
         $pizza->delete();
         return redirect()->route('pizzas.index');
     }
