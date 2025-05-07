@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="h-screen flex items-center justify-center">
-        <div class="bg-gray-700 text-white p-8 rounded-lg shadow-lg max-w-md w-full">
+    <div class="flex items-center justify-center">
+        <div class="bg-gray-700 text-white p-8 rounded-lg shadow-lg max-w-md w-full mt-12">
             <h1 class="text-xl font-bold text-center mb-6">Ingredient toevoegen</h1>
             <form action="{{ route('ingredienten.store') }}" method="POST" class="space-y-4">
                 @csrf

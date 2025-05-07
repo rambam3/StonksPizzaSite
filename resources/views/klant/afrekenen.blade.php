@@ -1,5 +1,5 @@
 <x-app-layout>
-    <section class="flex flex-col items-center h-screen space-y-8 mt-12">
+    <section class="flex flex-col items-center space-y-8 mt-12">
         <form class="flex flex-col bg-[#8C5B49] w-1/2 mx-auto p-8 gap-3 text-center mt-4 mb-6 rounded-2xl shadow-xl border border-black-300" action="{{ route('FinishBestelling') }}" method="post">
             @csrf
             @method('POST')

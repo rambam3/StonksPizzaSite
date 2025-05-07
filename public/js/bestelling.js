@@ -12,11 +12,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
             var pizzaPrijs = basePrijs;
             if (select.value === 'klein') {
-                pizzaPrijs = basePrijs;
+                pizzaPrijs = basePrijs * 0.8;
             } else if (select.value === 'normaal') {
-                pizzaPrijs = basePrijs + 2;
+                pizzaPrijs = basePrijs * 1;
             } else if (select.value === 'groot') {
-                pizzaPrijs = basePrijs + 4;
+                pizzaPrijs = basePrijs * 1.2;
             }
 
             priceElement.textContent = '€ ' + pizzaPrijs.toFixed(2);

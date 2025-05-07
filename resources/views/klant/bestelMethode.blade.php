@@ -1,5 +1,5 @@
 <x-app-layout>
-    <section class="flex flex-col items-center h-screen space-y-8 mt-12">
+    <section class="flex flex-col items-center space-y-8 mt-12">
         <div class="text-center">
             <h1 class="text-4xl font-bold">Pizza punten?</h1>
             <p class="text-lg mt-2">Wil jij genieten van een lekkere gratis pizza? Maak dan nu een account aan.</p>

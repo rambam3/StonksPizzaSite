@@ -96,7 +96,7 @@
         </section>
 
         <!-- About Us Section -->
-        <section class="bg-[#8C5B49] py-12 text-center">
+        <section class="bg-[#8C5B49] py-12 text-center mb-5">
             <h2 class="text-3xl font-bold mb-4 text-white">Wie Zijn Wij?</h2>
             <p class="text-lg max-w-3xl mx-auto text-white">
                 Bij Stonks Pizza draait alles om smaak, kwaliteit en snelheid. Wij maken pizza's met liefde,

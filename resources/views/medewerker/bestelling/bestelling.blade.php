@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="container mx-auto flex flex-col items-center mt-7 max-w-screen-lg h-screen">
+    <div class="container mx-auto flex flex-col items-center mt-7 max-w-screen-lg">
         <h1 class="text-center text-2xl font-bold mb-6">Bestellingen</h1>
         <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mx-8 mb-12 w-full">
             @foreach ($bestellingen as $bestelling)

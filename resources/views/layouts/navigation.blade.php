@@ -15,7 +15,7 @@
 
             <!-- Center -->
             <div class="flex items-center space-x-4 hidden sm:flex">
-                @if (!Auth::check() || !Auth::user()->isManager())
+                @if (!Auth::check() || !Auth::user()->isManager() && !Auth::user()->isMedewerker())
                 <!-- Menu Link -->
                 @if ($bestelling != null && App\Models\bestelling::Where('id', $bestelling->id)->exists())
                     <a href="{{ route('showStatus', ['bestelling' => $bestelling->id]) }}" class="text-white text-xl font-semibold hover:underline"> 

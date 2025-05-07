@@ -1,6 +1,6 @@
 <x-app-layout>
-    <div class="h-screen flex items-center justify-center">
-        <div class="bg-gray-700 text-white p-12 rounded-lg shadow-lg w-full max-w-6xl">
+    <div class="flex items-center justify-center">
+        <div class="bg-gray-700 text-white p-12 rounded-lg shadow-lg w-full max-w-6xl mt-12">
             <h1 class="text-xl font-bold text-center mb-6">Ingredienten</h1>
             <div class="grid grid-cols-4 gap-4">
                 @foreach ($ingredienten as $ingredient)
