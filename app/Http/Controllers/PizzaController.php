@@ -33,21 +33,31 @@ class PizzaController extends Controller
      */
     public function store(Request $request)
     {
-        $ingredienten = $request->ingredienten;
+        // Calculate the total price based on the selected ingredients
+        $ingredienten = $request->ingredienten ?? [];
         $prijs = 0;
+    
         foreach ($ingredienten as $ingredient) {
-            $prijs += Ingredient::find($ingredient)->prijs;
+            $prijs += Ingredient::findOrFail($ingredient)->prijs; // Use findOrFail for error handling
         }
-
-        $path = $request->file('afbeelding')->store('images/pizzas', 'public');
-        $pathArray = explode('/', $path);
-        $imgPath = 'storage/' . $pathArray[1] . '/' . $pathArray[2];
-
-        Pizza::create([
+    
+        // Handle the image upload
+        $imgPath = null;
+        if ($request->hasFile('afbeelding') && $request->file('afbeelding')->isValid()) {
+            $path = $request->file('afbeelding')->store('images/pizzas', 'public');
+            $imgPath = 'storage/' . $path;
+        }
+    
+        // Create a new pizza instance and save it
+        $pizza = Pizza::create([
             'naam' => $request->name,
             'prijs' => $prijs,
             'image_path' => $imgPath,
         ]);
+
+        $pizza->ingredienten()->attach($ingredienten);
+    
+        // Redirect to the pizzas index page
         return redirect()->route('pizzas.index');
     }
 
@@ -64,7 +74,9 @@ class PizzaController extends Controller
      */
     public function edit(Pizza $pizza)
     {
-        return view('pizzas.edit', compact('pizza'));
+        $ingredienten = Ingredient::all();
+        $pizzaIngredienten = $pizza->ingredienten->pluck('id')->toArray();
+        return view('medewerker.pizzas.edit', compact('pizza', 'ingredienten', 'pizzaIngredienten'));
     }
     # code...
     /**
@@ -72,7 +84,26 @@ class PizzaController extends Controller
      */
     public function update(Request $request, Pizza $pizza)
     {
-        $pizza->naam = $request->naam;
+        $ingredienten = $request->ingredienten ?? [];
+        $prijs = 0;
+    
+        foreach ($ingredienten as $ingredient) {
+            $prijs += Ingredient::findOrFail($ingredient)->prijs; // Use findOrFail for error handling
+        }
+
+        $imgPath = $pizza->image_path;
+        if ($request->hasFile('afbeelding') && $request->file('afbeelding')->isValid()) {
+            $path = $request->file('afbeelding')->store('images/pizzas', 'public');
+            $imgPath = 'storage/' . $path;
+            if (file_exists(public_path($pizza->image_path))) {
+                unlink(public_path($pizza->image_path));
+            }
+        }
+        $pizza->naam = $request->name;
+        $pizza->prijs = $prijs;
+        $pizza->image_path = $imgPath;
+        $pizza->ingredienten()->sync($ingredienten);
+
         $pizza->save();
 
         return redirect()->route('pizzas.index');

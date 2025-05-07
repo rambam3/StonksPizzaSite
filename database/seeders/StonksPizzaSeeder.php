@@ -75,12 +75,9 @@ class StonksPizzaSeeder extends Seeder
             ['naam' => 'Margherita', 'prijs' => 5.00, 'image_path' => 'images/pizzas/margherita.png'],
             ['naam' => 'Pepperoni', 'prijs' => 6.00, 'image_path' => 'images/pizzas/pepperoni.png'],
             ['naam' => 'Funghi', 'prijs' => 6.00, 'image_path' => 'images/pizzas/funghi.png'],
-            ['naam' => 'Salami', 'prijs' => 6.00, 'image_path' => 'images/pizzas/salami.png'],
-            ['naam' => 'Hawaii', 'prijs' => 7.00, 'image_path' => 'images/pizzas/hawaii.png'],
-            ['naam' => 'Mexican hot & spicy', 'prijs' => 8.00, 'image_path' => 'images/pizzas/mexicanHot&Spicy.png'],
-            ['naam' => 'crazy', 'prijs' => 17.00, ],
-            ['naam'=> 'klein', 'prijs' => 8.00, ],
-            ['naam'=> 'een hele lekkere pizza', 'prijs' => 8.00, ]
+            ['naam' => 'Salami', 'prijs' => 6.00, 'image_path' => 'images/pizzas/salami.jpg'],
+            ['naam' => 'Hawaii', 'prijs' => 7.00, 'image_path' => 'images/pizzas/hawaii.jpg'],
+            ['naam' => 'Mexican hot & spicy', 'prijs' => 8.00, 'image_path' => 'images/pizzas/Hot&Spicy.jpg'],
         ];
 
         foreach ($pizzas as $pizza) {
@@ -94,9 +91,6 @@ class StonksPizzaSeeder extends Seeder
             'Salami' => ['Tomatensaus', 'Mozarella', 'Pepperoni', 'Paprika'],
             'Hawaii' => ['Tomatensaus', 'Mozarella', 'Ham', 'Ananas'],
             'Mexican hot & spicy' => ['Tomatensaus', 'Mozarella', 'Pepperoni', 'Paprika', 'Champignons', 'Rucola'],
-            'crazy' => ['Tomatensaus', 'Mozarella', 'Pepperoni', 'Paprika', 'Champignons', 'Rucola', 'Ansjovis', 'Tonijn', 'Ham', 'Ananas', 'Parmezaan', 'Pesto', 'Gorgonzola', 'Zongedroogde Tomaten'],
-            'klein' => ['Tomatensaus'],
-            'een hele lekkere pizza' => ['Tomatensaus', 'Mozarella', 'Pepperoni', 'Parmezaan', 'Pesto', 'Gorgonzola', 'Zongedroogde Tomaten']
         ];
 
         foreach ($pizzaIngredients as $pizzaNaam => $ingredienten) {

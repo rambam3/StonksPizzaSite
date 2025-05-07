@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="h-screen">
+    <div>
         <div class="bg-[#BFB3A4] p-8 rounded-md mx-auto shadow-lg mt-12 mb-12 w-2/4">
             <!-- Bestelling Header -->
             <h2 class="text-center font-semibold text-lg tracking-wider text-gray-800 mb-6">BESTELLING {{ $bestelling->id }}</h2>

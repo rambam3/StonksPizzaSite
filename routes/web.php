@@ -14,7 +14,7 @@ use App\Models\Ingredient;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 
-
+Route::get('/', [ProfileController::class, 'login'])->name('login');
 
 Route::get('/faq', function () {
     return view('klant.faq');

@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div class="min-h-screen flex flex-col items-center py-10">
+    <div class="flex flex-col items-center py-10">
         <div class="w-full max-w-6xl">
             <div class="flex justify-between items-center mb-6">
                 <h1 class="text-3xl font-bold">Pizza's</h1>
